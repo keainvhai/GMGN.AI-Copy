@@ -1,73 +1,73 @@
-# Welcome to your Lovable project
+# 🔥 GMGN.AI-Copy – Pixel Perfect React Clone
 
-## Project info
+Live site: 👉 [https://keainvhai.github.io/GMGN.AI-Copy/](https://keainvhai.github.io/GMGN.AI-Copy/)
 
-**URL**: https://lovable.dev/projects/5017d9ae-a5ee-4e9c-be13-e978f12d8f51
+> A React + Tailwind CSS + Shadcn UI recreation of GMGN.AI mobile interface.  
+> Built with Vite, deployed via GitHub Pages.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🛠️ Tech Stack
 
-**Use Lovable**
+- [Vite](https://vitejs.dev/)
+- [React 18](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [react-query](https://tanstack.com/query/latest)
+- [react-router-dom](https://reactrouter.com/)
+- [react-toastify](https://fkhadra.github.io/react-toastify/)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5017d9ae-a5ee-4e9c-be13-e978f12d8f51) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📦 Getting Started (Local Development)
 
-**Use your preferred IDE**
+### 🔧 Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Node.js ≥ 18.x
+- npm or yarn
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 🚀 Setup
 
-Follow these steps:
+```bash
+# 1. Clone this repo
+git clone https://github.com/keainvhai/GMGN.AI-Copy.git
+cd GMGN.AI-Copy
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# 2. Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 3. Start dev server
 npm run dev
 ```
+Visit http://localhost:8080 in your browser.
 
-**Edit a file directly in GitHub**
+## 🚀 Deployment (GitHub Pages)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+This project is deployed at:
 
-**Use GitHub Codespaces**
+👉 [https://keainvhai.github.io/GMGN.AI-Copy/](https://keainvhai.github.io/GMGN.AI-Copy/)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### 📦 Build & Deploy
 
-## What technologies are used for this project?
+```bash
+npm run build       # Build production files
+npm run deploy      # Deploy to gh-pages branch
+```
 
-This project is built with:
+### Notes
+- Uses `HashRouter` for client-side routing on GitHub Pages.
+- `vite.config.js` is set with `base: '/GMGN.AI-Copy/'` for correct asset paths.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
 
-## How can I deploy this project?
+## 👨‍💻 Editing the Project
 
-Simply open [Lovable](https://lovable.dev/projects/5017d9ae-a5ee-4e9c-be13-e978f12d8f51) and click on Share -> Publish.
+You can edit this project using any of the following:
 
-## Can I connect a custom domain to my Lovable project?
+- Your local IDE (VS Code, WebStorm, etc.)
+- GitHub web editor
+- GitHub Codespaces (optional)
 
-Yes, you can!
+## 📄 License
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+MIT © 2025 keainvhai
