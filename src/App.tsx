@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // change to deploy
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Trenches from "./pages/Trenches";
 import Trending from "./pages/Trending";
@@ -25,7 +25,7 @@ const App = () => {
           <HashRouter>
             <Layout>
               <Routes>
-                <Route path="/" element={<Trenches />} />
+                <Route path="/" element={<Navigate to="/trending" replace />} />
                 <Route path="/trending" element={<Trending />} />
                 <Route path="/copytrade" element={<CopyTrade />} />
                 <Route path="/new-pair" element={<Trenches />} />
