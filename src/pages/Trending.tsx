@@ -9,17 +9,17 @@ const Trending = () => {
 
   const trendingTokens = [
     {
-      id: 'muskwif',
-      name: 'MUSKWIF',
-      symbol: 'MUSKWIF',
+      id: 'trump',
+      name: 'TRUMP',
+      symbol: 'TRUMP',
       logo: '/lovable-uploads/97360cf2-12fe-46cd-892c-fbb6391c351f.png',
-      address: 'AYZNq...ump',
-      age: '9h',
-      liquidity: '278.3K',
-      marketCap: '$1.5M',
-      blueChip: '0%',
-      holders: '12.8K',
-      smart: '--',
+      address: '6p6xg...iPN',
+      age: '146d',
+      liquidity: '489.4M',
+      marketCap: '$9.9B',
+      blueChip: '2.3%',
+      holders: '628.3',
+      smart: '41/452',
       transactions: { buys: 37725, sells: 18586, total: 19139 },
       volume: '$5.9M',
       price: '$0.001567',
@@ -28,17 +28,17 @@ const Trending = () => {
       trending: true,
     },
     {
-      id: 'missile',
-      name: 'Missile',
-      symbol: 'Missile',
+      id: 'bonk',
+      name: 'Bonk',
+      symbol: 'Bonk',
       logo: '/lovable-uploads/97360cf2-12fe-46cd-892c-fbb6391c351f.png',
-      address: '9MQZV...ump',
-      age: '40m',
-      liquidity: '53.7K',
-      marketCap: '$269.8K',
-      blueChip: '0.1%',
-      holders: '4.3K',
-      smart: '--',
+      address: 'DezXA...263',
+      age: '618d',
+      liquidity: '3.1M',
+      marketCap: '$1.2B',
+      blueChip: '4.2%',
+      holders: '507.2',
+      smart: '33/352',
       transactions: { buys: 27875, sells: 12388, total: 15487 },
       volume: '$419.6K',
       price: '$0.0002',
@@ -47,17 +47,17 @@ const Trending = () => {
       trending: true,
     },
     {
-      id: 'goldcoin',
-      name: 'goldcoin',
-      symbol: 'goldcoin',
+      id: 'swif',
+      name: '$WIF',
+      symbol: '$WIF',
       logo: '/lovable-uploads/97360cf2-12fe-46cd-892c-fbb6391c351f.png',
-      address: '6oFgF...ump',
-      age: '1h',
-      liquidity: '80.7K',
-      marketCap: '$88K',
-      blueChip: '0.5%',
-      holders: 219,
-      smart: '-/6',
+      address: 'EKpQG...cjm',
+      age: '521d',
+      liquidity: '14.3M',
+      marketCap: '$826.6M',
+      blueChip: '12%',
+      holders: '231.3',
+      smart: '30/188',
       transactions: { buys: 26785, sells: 13435, total: 13350 },
       volume: '$22.3M',
       price: '$0.0003',
@@ -66,36 +66,36 @@ const Trending = () => {
       trending: true,
     },
     {
-      id: 'xchat',
-      name: 'XChat',
-      symbol: 'XChat',
+      id: 'fartcoin',
+      name: 'Fartcoin',
+      symbol: 'Fartcoin',
       logo: '/lovable-uploads/97360cf2-12fe-46cd-892c-fbb6391c351f.png',
-      address: '8aK21...UMP',
-      age: '1h',
-      liquidity: '151.2K',
-      marketCap: '$214.4K',
-      blueChip: '0%',
-      holders: 210,
-      smart: '--',
+      address: '9BB6N...ump',
+      age: '238d',
+      liquidity: '38.1M',
+      marketCap: '$1.1B',
+      blueChip: '7.6%',
+      holders: '159.1',
+      smart: '17/214',
       transactions: { buys: 26237, sells: 13118, total: 13119 },
       volume: '$21.1M',
       price: '$0.0002',
       change: 0,
       verified: true,
-      trending: true,
+      trending: false,
     },
     {
-      id: 'm2',
-      name: 'M2',
-      symbol: 'M2',
+      id: 'popcat',
+      name: 'POPCAT',
+      symbol: 'POPCAT',
       logo: '/lovable-uploads/97360cf2-12fe-46cd-892c-fbb6391c351f.png',
-      address: 'Dps45...ojs',
-      age: '1h',
-      liquidity: '52.4K',
-      marketCap: '$755K',
-      blueChip: '0.4%',
-      holders: 223,
-      smart: '--',
+      address: '7GCih...2hr',
+      age: '521d',
+      liquidity: '12.4M',
+      marketCap: '$301.8M',
+      blueChip: '18.5%',
+      holders: '142.5',
+      smart: '19/259',
       transactions: { buys: 25852, sells: 12863, total: 12989 },
       volume: '$11.4M',
       price: '$0.001',
@@ -104,17 +104,17 @@ const Trending = () => {
       trending: false,
     },
     {
-      id: 'labubu',
-      name: 'LABUBU',
-      symbol: 'LABUBU',
+      id: 'zenai',
+      name: 'ZENAI',
+      symbol: 'ZENAI',
       logo: '/lovable-uploads/97360cf2-12fe-46cd-892c-fbb6391c351f.png',
-      address: '7EX77...ump',
-      age: '57m',
-      liquidity: '97.9K',
-      marketCap: '$57.5K',
-      blueChip: '0%',
-      holders: 164,
-      smart: '--',
+      address: '5DKLa...ump',
+      age: '10d',
+      liquidity: '177.9K',
+      marketCap: '$1M',
+      blueChip: '5.4%',
+      holders: '78.6K',
+      smart: '-/10',
       transactions: { buys: 23044, sells: 11522, total: 11522 },
       volume: '$13.2M',
       price: '$0.0001',
@@ -162,44 +162,44 @@ const Trending = () => {
   };
 
   return (
-    <div className="p-4 max-w-full mx-auto bg-gray-900 text-white">
+    <div className="p-2 md:p-4 max-w-full mx-auto bg-gray-900 text-white">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-4">
-          <h1 className="text-2xl font-bold">Trending</h1>
-          <span className="text-gray-400">🔥 NextBC</span>
+      <div className="flex items-center justify-between mb-4 md:mb-6">
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <h1 className="text-lg md:text-2xl font-bold">Trending</h1>
+          <span className="text-gray-400 text-sm">🔥 NextBC</span>
         </div>
         
-        <div className="flex items-center space-x-4 text-sm">
+        <div className="flex items-center space-x-2 md:space-x-4 text-xs md:text-sm">
           <button className="flex items-center space-x-1 hover:text-green-400">
             <span>👥</span>
-            <span>Devs</span>
+            <span className="hidden sm:inline">Devs</span>
           </button>
           <button className="flex items-center space-x-1 hover:text-green-400">
             <span>🔧</span>
-            <span>Filter</span>
+            <span className="hidden sm:inline">Filter</span>
           </button>
           <button className="flex items-center space-x-1 hover:text-green-400">
             <span>💰</span>
-            <span>Buy</span>
+            <span className="hidden sm:inline">Buy</span>
           </button>
           <span>=</span>
           <span>0</span>
-          <div className="flex space-x-2">
-            <span className="px-2 py-1 bg-gray-700 rounded text-xs">P1</span>
-            <span className="px-2 py-1 bg-gray-700 rounded text-xs">P2</span>
-            <span className="px-2 py-1 bg-gray-700 rounded text-xs">P3</span>
+          <div className="flex space-x-1 md:space-x-2">
+            <span className="px-1 md:px-2 py-1 bg-gray-700 rounded text-xs">P1</span>
+            <span className="px-1 md:px-2 py-1 bg-gray-700 rounded text-xs">P2</span>
+            <span className="px-1 md:px-2 py-1 bg-gray-700 rounded text-xs">P3</span>
           </div>
         </div>
       </div>
 
       {/* Time Tabs */}
-      <div className="flex items-center space-x-6 mb-6">
+      <div className="flex items-center space-x-4 md:space-x-6 mb-4 md:mb-6">
         {tabs.map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-3 py-1 rounded text-sm transition-colors ${
+            className={`px-2 md:px-3 py-1 rounded text-xs md:text-sm transition-colors ${
               activeTab === tab
                 ? 'bg-gray-700 text-white'
                 : 'text-gray-400 hover:text-gray-300'
@@ -210,160 +210,178 @@ const Trending = () => {
         ))}
       </div>
 
-      {/* Table */}
+      {/* Table Container with Horizontal Scroll */}
       <div className="bg-gray-800 rounded-lg overflow-hidden">
-        {/* Table Header */}
-        <div className="px-4 py-3 border-b border-gray-700 grid grid-cols-12 gap-2 text-xs text-gray-400 items-center">
-          <div className="col-span-2">
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>Token</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <FilterDropdown
-              title="Age"
-              options={ageOptions}
-              onSelect={(value) => console.log('Age filter:', value)}
-            />
-          </div>
-          <div>
-            <FilterDropdown
-              title="Liq"
-              options={liquidityOptions}
-              onSelect={(value) => console.log('Liquidity filter:', value)}
-              hasRange={true}
-            />
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>MC</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>BlueChip</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <FilterDropdown
-              title="Holders"
-              options={holdersOptions}
-              onSelect={(value) => console.log('Holders filter:', value)}
-            />
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>Smart / KOL</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>1h TXs</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>1h Vol</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>Price</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>1h%</span>
-              <span>⇅</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Table Body */}
-        <div>
-          {trendingTokens.map((token, index) => (
-            <div
-              key={token.id}
-              className="px-4 py-3 border-b border-gray-700 last:border-b-0 hover:bg-gray-750 transition-colors grid grid-cols-12 gap-2 items-center text-sm"
-            >
-              {/* Token Info */}
-              <div className="col-span-2 flex items-center space-x-2">
-                <button
-                  onClick={() => toggleFavorite(token.id)}
-                  className={`text-lg hover:scale-110 transition-transform ${
-                    favorites.has(token.id) ? 'text-yellow-400' : 'text-gray-500'
-                  }`}
-                >
-                  {favorites.has(token.id) ? '★' : '☆'}
+        <div className="overflow-x-auto">
+          <div className="min-w-[800px]">
+            {/* Table Header */}
+            <div className="px-2 md:px-4 py-2 md:py-3 border-b border-gray-700 grid grid-cols-12 gap-1 md:gap-2 text-xs text-gray-400 items-center">
+              <div className="col-span-3 md:col-span-2">
+                <button className="flex items-center space-x-1 hover:text-white text-xs">
+                  <span>Token</span>
+                  <span>⇅</span>
                 </button>
-                <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xs font-bold">🔥</span>
-                </div>
-                <div className="min-w-0">
-                  <div className="font-semibold text-white flex items-center space-x-1">
-                    <span className="truncate">{token.name}</span>
-                    {token.verified && <span className="text-blue-400">✓</span>}
-                    {token.trending && <span className="text-purple-400">🔥</span>}
-                  </div>
-                  <div className="text-xs text-gray-500 truncate">{token.address}</div>
-                </div>
               </div>
-
-              {/* Age */}
-              <div className="text-white">{token.age}</div>
-
-              {/* Liquidity */}
-              <div className="text-white">{token.liquidity}</div>
-
-              {/* Market Cap */}
-              <div className="text-white">{token.marketCap}</div>
-
-              {/* BlueChip */}
-              <div className="text-white">{token.blueChip}</div>
-
-              {/* Holders */}
-              <div className="text-white">{token.holders}</div>
-
-              {/* Smart / KOL */}
-              <div className="text-white">{token.smart}</div>
-
-              {/* Transactions */}
-              <div className="text-white">
-                <div>{token.transactions.buys.toLocaleString()}</div>
-                <div className="text-xs text-gray-400">
-                  {token.transactions.sells.toLocaleString()}/{token.transactions.total.toLocaleString()}
-                </div>
+              <div className="hidden md:block">
+                <FilterDropdown
+                  title="Age"
+                  options={ageOptions}
+                  onSelect={(value) => console.log('Age filter:', value)}
+                />
               </div>
-
-              {/* Volume */}
-              <div className="text-white">{token.volume}</div>
-
-              {/* Price */}
-              <div className="text-white">{token.price}</div>
-
-              {/* Price Change */}
-              <div className={`font-medium ${
-                token.change > 0 ? 'text-green-400' : token.change < 0 ? 'text-red-400' : 'text-gray-400'
-              }`}>
-                {formatChange(token.change)}
+              <div className="hidden md:block">
+                <FilterDropdown
+                  title="Liq"
+                  options={liquidityOptions}
+                  onSelect={(value) => console.log('Liquidity filter:', value)}
+                  hasRange={true}
+                />
               </div>
-
-              {/* Buy Button */}
-              <div className="flex justify-end">
-                <button className="bg-green-500 hover:bg-green-600 text-black px-3 py-1 rounded text-xs font-medium transition-colors flex items-center space-x-1">
-                  <span>💰</span>
-                  <span>Buy</span>
+              <div className="hidden md:block">
+                <button className="flex items-center space-x-1 hover:text-white text-xs">
+                  <span>MC</span>
+                  <span>⇅</span>
                 </button>
+              </div>
+              <div className="hidden md:block">
+                <button className="flex items-center space-x-1 hover:text-white text-xs">
+                  <span>BlueChip</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div className="hidden lg:block">
+                <FilterDropdown
+                  title="Holders"
+                  options={holdersOptions}
+                  onSelect={(value) => console.log('Holders filter:', value)}
+                />
+              </div>
+              <div className="hidden lg:block">
+                <button className="flex items-center space-x-1 hover:text-white text-xs">
+                  <span>Smart / KOL</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div className="hidden xl:block">
+                <button className="flex items-center space-x-1 hover:text-white text-xs">
+                  <span>1h TXs</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div className="hidden xl:block">
+                <button className="flex items-center space-x-1 hover:text-white text-xs">
+                  <span>1h Vol</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div className="hidden sm:block">
+                <button className="flex items-center space-x-1 hover:text-white text-xs">
+                  <span>Price</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div>
+                <button className="flex items-center space-x-1 hover:text-white text-xs">
+                  <span>1h%</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div className="text-right">
+                <span className="text-xs">Buy</span>
               </div>
             </div>
-          ))}
+
+            {/* Table Body */}
+            <div>
+              {trendingTokens.map((token, index) => (
+                <div
+                  key={token.id}
+                  className="px-2 md:px-4 py-2 md:py-3 border-b border-gray-700 last:border-b-0 hover:bg-gray-750 transition-colors grid grid-cols-12 gap-1 md:gap-2 items-center text-xs md:text-sm"
+                >
+                  {/* Token Info - Fixed on Left */}
+                  <div className="col-span-3 md:col-span-2 flex items-center space-x-1 md:space-x-2 min-w-0">
+                    <button
+                      onClick={() => toggleFavorite(token.id)}
+                      className={`text-sm md:text-lg hover:scale-110 transition-transform flex-shrink-0 ${
+                        favorites.has(token.id) ? 'text-yellow-400' : 'text-gray-500'
+                      }`}
+                    >
+                      {favorites.has(token.id) ? '★' : '☆'}
+                    </button>
+                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-orange-500 flex items-center justify-center flex-shrink-0">
+                      <span className="text-xs font-bold">🔥</span>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="font-semibold text-white flex items-center space-x-1">
+                        <span className="truncate text-xs md:text-sm">{token.name}</span>
+                        <button 
+                          className="text-blue-400 hover:text-blue-300 flex-shrink-0"
+                          title="Search on Twitter"
+                        >
+                          🔍
+                        </button>
+                      </div>
+                      <div className="text-xs text-gray-500 truncate">{token.address}</div>
+                    </div>
+                  </div>
+
+                  {/* Age - Hidden on Mobile */}
+                  <div className="hidden md:block text-white text-xs">{token.age}</div>
+
+                  {/* Liquidity - Hidden on Mobile */}
+                  <div className="hidden md:block text-white text-xs">{token.liquidity}</div>
+
+                  {/* Market Cap - Hidden on Mobile */}
+                  <div className="hidden md:block text-white text-xs">{token.marketCap}</div>
+
+                  {/* BlueChip - Hidden on Mobile */}
+                  <div className="hidden md:block text-white text-xs">{token.blueChip}</div>
+
+                  {/* Holders - Hidden on Mobile/Tablet */}
+                  <div className="hidden lg:block text-white text-xs">{token.holders}</div>
+
+                  {/* Smart / KOL - Hidden on Mobile/Tablet */}
+                  <div className="hidden lg:block text-white text-xs">{token.smart}</div>
+
+                  {/* Transactions - Hidden on Mobile/Small Tablet */}
+                  <div className="hidden xl:block text-white text-xs">
+                    <div>{token.transactions.buys.toLocaleString()}</div>
+                    <div className="text-xs text-gray-400">
+                      {token.transactions.sells.toLocaleString()}/{token.transactions.total.toLocaleString()}
+                    </div>
+                  </div>
+
+                  {/* Volume - Hidden on Mobile/Small Tablet */}
+                  <div className="hidden xl:block text-white text-xs">{token.volume}</div>
+
+                  {/* Price - Hidden on Mobile */}
+                  <div className="hidden sm:block text-white text-xs">{token.price}</div>
+
+                  {/* Price Change */}
+                  <div className={`font-medium text-xs ${
+                    token.change > 0 ? 'text-green-400' : token.change < 0 ? 'text-red-400' : 'text-gray-400'
+                  }`}>
+                    {formatChange(token.change)}
+                  </div>
+
+                  {/* Buy Button - Fixed on Right */}
+                  <div className="flex justify-end">
+                    {/* Desktop Buy Button */}
+                    <button className="hidden md:flex bg-green-500 hover:bg-green-600 text-black px-2 md:px-3 py-1 rounded text-xs font-medium transition-colors items-center space-x-1">
+                      <span>💰</span>
+                      <span>Buy</span>
+                    </button>
+                    {/* Mobile Buy Button - Green Circle */}
+                    <button className="md:hidden w-6 h-6 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center transition-colors">
+                      <div className="w-3 h-3 bg-green-600 rounded-full flex items-center justify-center">
+                        <span className="text-xs text-white">⚡</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
