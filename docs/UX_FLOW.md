@@ -25,7 +25,7 @@
 - Token cards are for display only (non-clickable)
 - Bottom of page shows Snipe, Holding, and PnL summary
 
-🖼️ ![](./images/trench.png)
+🖼️ ![](https://github.com/keainvhai/GMGN.AI-Copy/blob/main/images/trench.png?raw=true)
 
 ---
 
@@ -35,7 +35,7 @@
 - Supports Telegram / Phantom / Extension wallet login
 - Upon success, user profile appears on top right (e.g., “Demo User”)
 
-🖼️ ![](./images/login.png)
+🖼️ ![](https://github.com/keainvhai/GMGN.AI-Copy/blob/main/images/login.png?raw=true)
 
 ---
 
@@ -44,7 +44,7 @@
 - Displays current SOL balance
 - Lists transactions with type and timestamp (Send / Receive)
 
-🖼️ ![](./images/wallet.png)
+🖼️ ![](https://github.com/keainvhai/GMGN.AI-Copy/blob/main/images/wallet.png?raw=true)
 
 ---
 
@@ -53,7 +53,7 @@
 - Shows trader list with PnL %, win rate, transaction count
 - Each row includes a “Copy” button
 
-🖼️ ![](./images/copyPage.png)
+🖼️ ![](https://github.com/keainvhai/GMGN.AI-Copy/blob/main/images/copyPage.png?raw=true)
 
 ---
 
@@ -62,7 +62,7 @@
 - Opens when user clicks “Copy” on a trader
 - Input amount, choose sell method, and confirm the action
 
-🖼️ ![](./images/copymodal.png)
+🖼️ ![](https://github.com/keainvhai/GMGN.AI-Copy/blob/main/images/copymodal.png?raw=true)
 
 ---
 
@@ -71,7 +71,7 @@
 - Appears at the bottom of CopyTrade page
 - Lists addresses and amounts of copied traders
 
-🖼️ ![](./images/copiedlist.png)
+🖼️ ![](https://github.com/keainvhai/GMGN.AI-Copy/blob/main/images/copiedlist.png?raw=true)
 
 ---
 
@@ -94,8 +94,3 @@
 > The user navigates to the “CopyTrade” page, selects a trader, and clicks the “Copy” button. A modal appears. They enter the amount, choose copy settings, and click “Confirm.” The copied trader will be listed in the “Copied Traders” section below.
 
 ---
-
-## 📌 Extra Notes
-
-- Save this document as `UX_FLOW.md` in your GitHub repo.
-- To export as PDF, use [Dillinger](https://dillinger.io/) or the Markdown Preview plugin in VS Code.
