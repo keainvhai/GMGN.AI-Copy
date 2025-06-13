@@ -1,18 +1,30 @@
-
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import React, { useState } from "react";
+import { X } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
-  mode: 'login' | 'signup';
-  onModeChange: (mode: 'login' | 'signup') => void;
+  mode: "login" | "signup";
+  onModeChange: (mode: "login" | "signup") => void;
 }
 
 const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [inviteCode, setInviteCode] = useState('');
+  const { login } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [inviteCode, setInviteCode] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      login(email, password);
+      onClose();
+    } catch (err) {
+      alert("Invalid email or password");
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -27,25 +39,26 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
         </button>
 
         <h2 className="text-2xl font-bold text-white mb-6">
-          {mode === 'login' ? 'Log In' : 'Sign Up'}
+          {mode === "login" ? "Log In" : "Sign Up"}
         </h2>
 
         <div className="mb-4">
           <p className="text-gray-400 text-sm mb-4">
-            {mode === 'login' 
-              ? "Don't have an account yet? " 
-              : "Already have an account? "
-            }
+            {mode === "login"
+              ? "Don't have an account yet? "
+              : "Already have an account? "}
             <button
-              onClick={() => onModeChange(mode === 'login' ? 'signup' : 'login')}
+              onClick={() =>
+                onModeChange(mode === "login" ? "signup" : "login")
+              }
               className="text-blue-400 hover:text-blue-300"
             >
-              {mode === 'login' ? 'Sign Up' : 'Log In'}
+              {mode === "login" ? "Sign Up" : "Log In"}
             </button>
           </p>
         </div>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label className="block text-white text-sm mb-2">Email</label>
             <input
@@ -57,7 +70,7 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
             />
           </div>
 
-          {mode === 'login' && (
+          {mode === "login" && (
             <div>
               <label className="block text-white text-sm mb-2">Password</label>
               <input
@@ -68,14 +81,17 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
                 className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400"
               />
               <div className="text-right mt-2">
-                <button type="button" className="text-green-400 text-sm hover:text-green-300">
+                <button
+                  type="button"
+                  className="text-green-400 text-sm hover:text-green-300"
+                >
                   Forgot Password?
                 </button>
               </div>
             </div>
           )}
 
-          {mode === 'signup' && (
+          {mode === "signup" && (
             <div>
               <input
                 type="text"
@@ -85,7 +101,8 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
                 className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400"
               />
               <p className="text-xs text-gray-400 mt-2">
-                The invite code cannot be changed after binding. Please ensure the correct invite code is entered.
+                The invite code cannot be changed after binding. Please ensure
+                the correct invite code is entered.
               </p>
             </div>
           )}
@@ -94,12 +111,12 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
             type="submit"
             className="w-full bg-green-500 hover:bg-green-600 text-black font-medium py-3 rounded-lg transition-colors"
           >
-            {mode === 'login' ? 'Log In' : 'Sign Up'}
+            {mode === "login" ? "Log In" : "Sign Up"}
           </button>
         </form>
 
         <div className="my-6 text-center text-gray-400 text-sm">
-          {mode === 'signup' ? 'OR Sign Up' : 'OR'}
+          {mode === "signup" ? "OR Sign Up" : "OR"}
         </div>
 
         <div className="flex justify-center space-x-8">
@@ -117,7 +134,7 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
             <span className="text-sm">Phantom</span>
           </button>
 
-          {mode === 'login' && (
+          {mode === "login" && (
             <button className="flex flex-col items-center space-y-2 text-gray-400 hover:text-white transition-colors">
               <div className="w-12 h-12 bg-gray-600 rounded-lg flex items-center justify-center">
                 <span className="text-white">📱</span>
@@ -127,7 +144,7 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
           )}
         </div>
 
-        {mode === 'login' && (
+        {mode === "login" && (
           <div className="mt-6 text-center">
             <button className="text-gray-400 hover:text-white text-sm transition-colors">
               Connect with extension wallet →

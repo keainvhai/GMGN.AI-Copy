@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Search, Menu, X } from "lucide-react";
 import AuthModal from "./AuthModal"; // ✅ 确保路径正确
+import { useAuth } from "../context/AuthContext";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { user, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("login");
@@ -70,7 +72,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               </div>
             </div>
 
-            <div className="flex items-center space-x-2">
+            {/* <div className="flex items-center space-x-2">
               <button
                 className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm transition-colors"
                 onClick={() => {
@@ -89,7 +91,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               >
                 Log In
               </button>
-            </div>
+            </div> */}
+            {user ? (
+              <div>
+                <span>Hello, {user.name}</span>
+                <button onClick={logout}>Logout</button>
+              </div>
+            ) : (
+              <button onClick={() => setAuthModalOpen(true)}>Log In</button>
+            )}
 
             {/* Mobile Menu Button */}
             <button

@@ -434,14 +434,14 @@ const Trending = () => {
                   </div>
 
                   {/* Buy Button - Sticky Right */}
-                  <div className="col-span-1 sticky right-0 bg-gray-800 z-10 flex justify-end items-center pl-2">
+                  <div className="sticky right-0 bg-gray-800 z-10 flex justify-end pl-2">
                     {isMobile ? (
                       <button className="bg-green-500 hover:bg-green-600 text-black w-6 h-6 md:w-8 md:h-8 rounded-full text-xs font-bold transition-colors flex items-center justify-center">
                         💰
                       </button>
                     ) : (
                       <button className="bg-green-500 hover:bg-green-600 text-black px-2 md:px-3 py-1 rounded text-xs font-medium transition-colors flex items-center space-x-1">
-                        <span>💰</span>
+                        <span></span>
                         <span>Buy</span>
                       </button>
                     )}
