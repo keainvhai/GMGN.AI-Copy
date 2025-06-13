@@ -1,10 +1,14 @@
 
 import React, { useState } from 'react';
 import FilterDropdown from '@/components/FilterDropdown';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Search } from 'lucide-react';
 
 const Trending = () => {
   const [activeTab, setActiveTab] = useState('1h');
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
+  const isMobile = useIsMobile();
   const tabs = ['1m', '5m', '1h', '6h', '24h'];
 
   const trendingTokens = [
@@ -156,50 +160,62 @@ const Trending = () => {
     setFavorites(newFavorites);
   };
 
+  const handleSort = (key: string) => {
+    let direction: 'asc' | 'desc' = 'asc';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
+
   const formatChange = (change: number) => {
     const sign = change >= 0 ? '+' : '';
     return `${sign}${change.toFixed(1)}%`;
   };
 
+  const searchOnTwitter = (tokenName: string) => {
+    window.open(`https://twitter.com/search?q=${encodeURIComponent(tokenName)}`, '_blank');
+  };
+
   return (
-    <div className="p-4 max-w-full mx-auto bg-gray-900 text-white">
+    <div className="p-2 md:p-4 max-w-full mx-auto bg-gray-900 text-white">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-4">
-          <h1 className="text-2xl font-bold">Trending</h1>
-          <span className="text-gray-400">🔥 NextBC</span>
+      <div className="flex items-center justify-between mb-4 md:mb-6">
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <h1 className="text-lg md:text-2xl font-bold">Trending</h1>
+          <span className="text-gray-400 text-sm md:text-base">🔥 NextBC</span>
         </div>
         
-        <div className="flex items-center space-x-4 text-sm">
+        <div className="flex items-center space-x-2 md:space-x-4 text-xs md:text-sm">
           <button className="flex items-center space-x-1 hover:text-green-400">
             <span>👥</span>
-            <span>Devs</span>
+            <span className="hidden md:inline">Devs</span>
           </button>
           <button className="flex items-center space-x-1 hover:text-green-400">
             <span>🔧</span>
-            <span>Filter</span>
+            <span className="hidden md:inline">Filter</span>
           </button>
           <button className="flex items-center space-x-1 hover:text-green-400">
             <span>💰</span>
-            <span>Buy</span>
+            <span className="hidden md:inline">Buy</span>
           </button>
           <span>=</span>
           <span>0</span>
-          <div className="flex space-x-2">
-            <span className="px-2 py-1 bg-gray-700 rounded text-xs">P1</span>
-            <span className="px-2 py-1 bg-gray-700 rounded text-xs">P2</span>
-            <span className="px-2 py-1 bg-gray-700 rounded text-xs">P3</span>
+          <div className="flex space-x-1 md:space-x-2">
+            <span className="px-1 md:px-2 py-1 bg-gray-700 rounded text-xs">P1</span>
+            <span className="px-1 md:px-2 py-1 bg-gray-700 rounded text-xs">P2</span>
+            <span className="px-1 md:px-2 py-1 bg-gray-700 rounded text-xs">P3</span>
           </div>
         </div>
       </div>
 
       {/* Time Tabs */}
-      <div className="flex items-center space-x-6 mb-6">
+      <div className="flex items-center space-x-3 md:space-x-6 mb-4 md:mb-6 overflow-x-auto">
         {tabs.map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-3 py-1 rounded text-sm transition-colors ${
+            className={`px-2 md:px-3 py-1 rounded text-xs md:text-sm transition-colors whitespace-nowrap ${
               activeTab === tab
                 ? 'bg-gray-700 text-white'
                 : 'text-gray-400 hover:text-gray-300'
@@ -210,160 +226,203 @@ const Trending = () => {
         ))}
       </div>
 
-      {/* Table */}
+      {/* Table Container with horizontal scroll */}
       <div className="bg-gray-800 rounded-lg overflow-hidden">
-        {/* Table Header */}
-        <div className="px-4 py-3 border-b border-gray-700 grid grid-cols-12 gap-2 text-xs text-gray-400 items-center">
-          <div className="col-span-2">
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>Token</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <FilterDropdown
-              title="Age"
-              options={ageOptions}
-              onSelect={(value) => console.log('Age filter:', value)}
-            />
-          </div>
-          <div>
-            <FilterDropdown
-              title="Liq"
-              options={liquidityOptions}
-              onSelect={(value) => console.log('Liquidity filter:', value)}
-              hasRange={true}
-            />
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>MC</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>BlueChip</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <FilterDropdown
-              title="Holders"
-              options={holdersOptions}
-              onSelect={(value) => console.log('Holders filter:', value)}
-            />
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>Smart / KOL</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>1h TXs</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>1h Vol</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>Price</span>
-              <span>⇅</span>
-            </button>
-          </div>
-          <div>
-            <button className="flex items-center space-x-1 hover:text-white">
-              <span>1h%</span>
-              <span>⇅</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Table Body */}
-        <div>
-          {trendingTokens.map((token, index) => (
-            <div
-              key={token.id}
-              className="px-4 py-3 border-b border-gray-700 last:border-b-0 hover:bg-gray-750 transition-colors grid grid-cols-12 gap-2 items-center text-sm"
-            >
-              {/* Token Info */}
-              <div className="col-span-2 flex items-center space-x-2">
-                <button
-                  onClick={() => toggleFavorite(token.id)}
-                  className={`text-lg hover:scale-110 transition-transform ${
-                    favorites.has(token.id) ? 'text-yellow-400' : 'text-gray-500'
-                  }`}
+        <div className="overflow-x-auto">
+          <div className="min-w-[1200px]">
+            {/* Table Header */}
+            <div className="px-2 md:px-4 py-2 md:py-3 border-b border-gray-700 grid grid-cols-12 gap-1 md:gap-2 text-xs text-gray-400 items-center sticky top-0 bg-gray-800">
+              <div className="col-span-2 sticky left-0 bg-gray-800 z-10">
+                <button 
+                  onClick={() => handleSort('name')}
+                  className="flex items-center space-x-1 hover:text-white"
                 >
-                  {favorites.has(token.id) ? '★' : '☆'}
+                  <span>Token</span>
+                  <span>⇅</span>
                 </button>
-                <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xs font-bold">🔥</span>
-                </div>
-                <div className="min-w-0">
-                  <div className="font-semibold text-white flex items-center space-x-1">
-                    <span className="truncate">{token.name}</span>
-                    {token.verified && <span className="text-blue-400">✓</span>}
-                    {token.trending && <span className="text-purple-400">🔥</span>}
-                  </div>
-                  <div className="text-xs text-gray-500 truncate">{token.address}</div>
-                </div>
               </div>
-
-              {/* Age */}
-              <div className="text-white">{token.age}</div>
-
-              {/* Liquidity */}
-              <div className="text-white">{token.liquidity}</div>
-
-              {/* Market Cap */}
-              <div className="text-white">{token.marketCap}</div>
-
-              {/* BlueChip */}
-              <div className="text-white">{token.blueChip}</div>
-
-              {/* Holders */}
-              <div className="text-white">{token.holders}</div>
-
-              {/* Smart / KOL */}
-              <div className="text-white">{token.smart}</div>
-
-              {/* Transactions */}
-              <div className="text-white">
-                <div>{token.transactions.buys.toLocaleString()}</div>
-                <div className="text-xs text-gray-400">
-                  {token.transactions.sells.toLocaleString()}/{token.transactions.total.toLocaleString()}
-                </div>
+              <div>
+                <FilterDropdown
+                  title="Age"
+                  options={ageOptions}
+                  onSelect={(value) => console.log('Age filter:', value)}
+                />
               </div>
-
-              {/* Volume */}
-              <div className="text-white">{token.volume}</div>
-
-              {/* Price */}
-              <div className="text-white">{token.price}</div>
-
-              {/* Price Change */}
-              <div className={`font-medium ${
-                token.change > 0 ? 'text-green-400' : token.change < 0 ? 'text-red-400' : 'text-gray-400'
-              }`}>
-                {formatChange(token.change)}
+              <div>
+                <FilterDropdown
+                  title="Liq"
+                  options={liquidityOptions}
+                  onSelect={(value) => console.log('Liquidity filter:', value)}
+                  hasRange={true}
+                />
               </div>
-
-              {/* Buy Button */}
-              <div className="flex justify-end">
-                <button className="bg-green-500 hover:bg-green-600 text-black px-3 py-1 rounded text-xs font-medium transition-colors flex items-center space-x-1">
-                  <span>💰</span>
-                  <span>Buy</span>
+              <div>
+                <button 
+                  onClick={() => handleSort('marketCap')}
+                  className="flex items-center space-x-1 hover:text-white"
+                >
+                  <span>MC</span>
+                  <span>⇅</span>
                 </button>
+              </div>
+              <div>
+                <button 
+                  onClick={() => handleSort('blueChip')}
+                  className="flex items-center space-x-1 hover:text-white"
+                >
+                  <span>BlueChip</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div>
+                <FilterDropdown
+                  title="Holders"
+                  options={holdersOptions}
+                  onSelect={(value) => console.log('Holders filter:', value)}
+                />
+              </div>
+              <div>
+                <button 
+                  onClick={() => handleSort('smart')}
+                  className="flex items-center space-x-1 hover:text-white"
+                >
+                  <span>Smart / KOL</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div>
+                <button 
+                  onClick={() => handleSort('transactions')}
+                  className="flex items-center space-x-1 hover:text-white"
+                >
+                  <span>1h TXs</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div>
+                <button 
+                  onClick={() => handleSort('volume')}
+                  className="flex items-center space-x-1 hover:text-white"
+                >
+                  <span>1h Vol</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div>
+                <button 
+                  onClick={() => handleSort('price')}
+                  className="flex items-center space-x-1 hover:text-white"
+                >
+                  <span>Price</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div>
+                <button 
+                  onClick={() => handleSort('change')}
+                  className="flex items-center space-x-1 hover:text-white"
+                >
+                  <span>1h%</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div className="sticky right-0 bg-gray-800 z-10">
+                <span>Buy</span>
               </div>
             </div>
-          ))}
+
+            {/* Table Body */}
+            <div>
+              {trendingTokens.map((token, index) => (
+                <div
+                  key={token.id}
+                  className="px-2 md:px-4 py-2 md:py-3 border-b border-gray-700 last:border-b-0 hover:bg-gray-750 transition-colors grid grid-cols-12 gap-1 md:gap-2 items-center text-xs md:text-sm"
+                >
+                  {/* Token Info - Sticky Left */}
+                  <div className="col-span-2 flex items-center space-x-2 sticky left-0 bg-gray-800 z-10 pr-2">
+                    <button
+                      onClick={() => toggleFavorite(token.id)}
+                      className={`text-base md:text-lg hover:scale-110 transition-transform ${
+                        favorites.has(token.id) ? 'text-yellow-400' : 'text-gray-500'
+                      }`}
+                    >
+                      {favorites.has(token.id) ? '★' : '☆'}
+                    </button>
+                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-orange-500 flex items-center justify-center flex-shrink-0">
+                      <span className="text-xs font-bold">🔥</span>
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-semibold text-white flex items-center space-x-1">
+                        <span className="truncate text-xs md:text-sm">{token.name}</span>
+                        <button
+                          onClick={() => searchOnTwitter(token.name)}
+                          className="text-blue-400 hover:text-blue-300 transition-colors"
+                          title="Search on Twitter"
+                        >
+                          <Search size={12} />
+                        </button>
+                        {token.trending && <span className="text-purple-400">🔥</span>}
+                      </div>
+                      <div className="text-xs text-gray-500 truncate">{token.address}</div>
+                    </div>
+                  </div>
+
+                  {/* Age */}
+                  <div className="text-white text-xs">{token.age}</div>
+
+                  {/* Liquidity */}
+                  <div className="text-white text-xs">{token.liquidity}</div>
+
+                  {/* Market Cap */}
+                  <div className="text-white text-xs">{token.marketCap}</div>
+
+                  {/* BlueChip */}
+                  <div className="text-white text-xs">{token.blueChip}</div>
+
+                  {/* Holders */}
+                  <div className="text-white text-xs">{token.holders}</div>
+
+                  {/* Smart / KOL */}
+                  <div className="text-white text-xs">{token.smart}</div>
+
+                  {/* Transactions */}
+                  <div className="text-white text-xs">
+                    <div>{token.transactions.buys.toLocaleString()}</div>
+                    <div className="text-xs text-gray-400">
+                      {token.transactions.sells.toLocaleString()}/{token.transactions.total.toLocaleString()}
+                    </div>
+                  </div>
+
+                  {/* Volume */}
+                  <div className="text-white text-xs">{token.volume}</div>
+
+                  {/* Price */}
+                  <div className="text-white text-xs">{token.price}</div>
+
+                  {/* Price Change */}
+                  <div className={`font-medium text-xs ${
+                    token.change > 0 ? 'text-green-400' : token.change < 0 ? 'text-red-400' : 'text-gray-400'
+                  }`}>
+                    {formatChange(token.change)}
+                  </div>
+
+                  {/* Buy Button - Sticky Right */}
+                  <div className="sticky right-0 bg-gray-800 z-10 flex justify-end pl-2">
+                    {isMobile ? (
+                      <button className="bg-green-500 hover:bg-green-600 text-black w-6 h-6 md:w-8 md:h-8 rounded-full text-xs font-bold transition-colors flex items-center justify-center">
+                        💰
+                      </button>
+                    ) : (
+                      <button className="bg-green-500 hover:bg-green-600 text-black px-2 md:px-3 py-1 rounded text-xs font-medium transition-colors flex items-center space-x-1">
+                        <span>💰</span>
+                        <span>Buy</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
