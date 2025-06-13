@@ -1,20 +1,22 @@
-
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Search, Menu, X } from 'lucide-react';
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Search, Menu, X } from "lucide-react";
+import AuthModal from "./AuthModal"; // ✅ 确保路径正确
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
   const location = useLocation();
 
   const navItems = [
-    { name: 'Trenches', path: '/' },
-    { name: 'New pair', path: '/new-pair' },
-    { name: 'Trending', path: '/trending' },
-    { name: 'CopyTrade', path: '/copytrade' },
-    { name: 'Monitor', path: '/monitor' },
-    { name: 'Follow', path: '/follow' },
-    { name: 'Holding', path: '/holding' },
+    { name: "Trenches", path: "/" },
+    { name: "New pair", path: "/new-pair" },
+    { name: "Trending", path: "/trending" },
+    { name: "CopyTrade", path: "/copytrade" },
+    { name: "Monitor", path: "/monitor" },
+    { name: "Follow", path: "/follow" },
+    { name: "Holding", path: "/holding" },
   ];
 
   return (
@@ -37,7 +39,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 key={item.path}
                 to={item.path}
                 className={`text-sm hover:text-green-400 transition-colors ${
-                  location.pathname === item.path ? 'text-green-400' : 'text-gray-300'
+                  location.pathname === item.path
+                    ? "text-green-400"
+                    : "text-gray-300"
                 }`}
               >
                 {item.name}
@@ -55,7 +59,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 className="bg-transparent text-sm text-white placeholder-gray-400 outline-none flex-1"
               />
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-400">Ctrl alt K</span>
               <div className="flex items-center space-x-2">
@@ -67,10 +71,22 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             </div>
 
             <div className="flex items-center space-x-2">
-              <button className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm transition-colors">
+              <button
+                className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm transition-colors"
+                onClick={() => {
+                  setAuthMode("signup");
+                  setAuthModalOpen(true);
+                }}
+              >
                 Sign Up
               </button>
-              <button className="bg-white hover:bg-gray-100 text-black px-4 py-2 rounded-lg text-sm transition-colors">
+              <button
+                className="bg-white hover:bg-gray-100 text-black px-4 py-2 rounded-lg text-sm transition-colors"
+                onClick={() => {
+                  setAuthMode("login");
+                  setAuthModalOpen(true);
+                }}
+              >
                 Log In
               </button>
             </div>
@@ -80,7 +96,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               className="lg:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
@@ -94,7 +114,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   key={item.path}
                   to={item.path}
                   className={`text-sm hover:text-green-400 transition-colors py-2 ${
-                    location.pathname === item.path ? 'text-green-400' : 'text-gray-300'
+                    location.pathname === item.path
+                      ? "text-green-400"
+                      : "text-gray-300"
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -107,9 +129,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1">
-        {children}
-      </main>
+      <main className="flex-1">{children}</main>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        mode={authMode}
+        onModeChange={(newMode) => setAuthMode(newMode)}
+      />
     </div>
   );
 };
