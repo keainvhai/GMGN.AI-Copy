@@ -1,0 +1,5 @@
+// market.json
+[
+  { "symbol": "SOL", "price": "165.32", "change": "+3.4%" },
+  { "symbol": "BTC", "price": "68,213", "change": "-1.2%" }
+]

@@ -1,0 +1,19 @@
+{
+  "balance": "5.23 SOL",
+  "transactions": [
+    {
+      "id": 1,
+      "type": "Send",
+      "amount": "-1.2 SOL",
+      "to": "xyz",
+      "date": "2024-06-01"
+    },
+    {
+      "id": 2,
+      "type": "Receive",
+      "amount": "+2.5 SOL",
+      "from": "abc",
+      "date": "2024-05-30"
+    }
+  ]
+}
