@@ -5,6 +5,7 @@ import FilterDropdown from '@/components/FilterDropdown';
 const Trending = () => {
   const [activeTab, setActiveTab] = useState('1h');
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
   const tabs = ['1m', '5m', '1h', '6h', '24h'];
 
   const trendingTokens = [
@@ -18,12 +19,25 @@ const Trending = () => {
       liquidity: '489.4M',
       marketCap: '$9.9B',
       blueChip: '2.3%',
-      holders: '628.3',
+      holders: '628.3K',
       smart: '41/452',
+      kol: '1,554',
+      kolTotal: '758/796',
       transactions: { buys: 37725, sells: 18586, total: 19139 },
-      volume: '$5.9M',
-      price: '$0.001567',
-      change: -0.3,
+      volume: '$6.3M',
+      price: '$9.9275',
+      change1m: 0.2,
+      change5m: -0.1,
+      change1h: 0.2,
+      change6h: 0,
+      change24h: -0.3,
+      noMint: 'Yes',
+      blacklist: 'No',
+      burnt: '?',
+      top10: '10%',
+      insiders: '0%',
+      degen: 'HODL',
+      dev: 'HODL',
       verified: true,
       trending: true,
     },
@@ -37,12 +51,25 @@ const Trending = () => {
       liquidity: '3.1M',
       marketCap: '$1.2B',
       blueChip: '4.2%',
-      holders: '507.2',
+      holders: '507.2K',
       smart: '33/352',
+      kol: '1,245',
+      kolTotal: '642/698',
       transactions: { buys: 27875, sells: 12388, total: 15487 },
       volume: '$419.6K',
       price: '$0.0002',
-      change: 0.1,
+      change1m: 0.1,
+      change5m: 0.2,
+      change1h: 0.1,
+      change6h: 0.3,
+      change24h: 0.1,
+      noMint: 'Yes',
+      blacklist: 'No',
+      burnt: '?',
+      top10: '8%',
+      insiders: '2%',
+      degen: 'HODL',
+      dev: 'HODL',
       verified: true,
       trending: true,
     },
@@ -56,72 +83,29 @@ const Trending = () => {
       liquidity: '14.3M',
       marketCap: '$826.6M',
       blueChip: '12%',
-      holders: '231.3',
+      holders: '231.3K',
       smart: '30/188',
+      kol: '987',
+      kolTotal: '453/512',
       transactions: { buys: 26785, sells: 13435, total: 13350 },
       volume: '$22.3M',
       price: '$0.0003',
-      change: 0.5,
+      change1m: 0.5,
+      change5m: 0.3,
+      change1h: 0.5,
+      change6h: 0.2,
+      change24h: 0.5,
+      noMint: 'Yes',
+      blacklist: 'No',
+      burnt: '?',
+      top10: '12%',
+      insiders: '1%',
+      degen: 'HODL',
+      dev: 'HODL',
       verified: true,
       trending: true,
     },
-    {
-      id: 'fartcoin',
-      name: 'Fartcoin',
-      symbol: 'Fartcoin',
-      logo: '/lovable-uploads/97360cf2-12fe-46cd-892c-fbb6391c351f.png',
-      address: '9BB6N...ump',
-      age: '238d',
-      liquidity: '38.1M',
-      marketCap: '$1.1B',
-      blueChip: '7.6%',
-      holders: '159.1',
-      smart: '17/214',
-      transactions: { buys: 26237, sells: 13118, total: 13119 },
-      volume: '$21.1M',
-      price: '$0.0002',
-      change: 0,
-      verified: true,
-      trending: false,
-    },
-    {
-      id: 'popcat',
-      name: 'POPCAT',
-      symbol: 'POPCAT',
-      logo: '/lovable-uploads/97360cf2-12fe-46cd-892c-fbb6391c351f.png',
-      address: '7GCih...2hr',
-      age: '521d',
-      liquidity: '12.4M',
-      marketCap: '$301.8M',
-      blueChip: '18.5%',
-      holders: '142.5',
-      smart: '19/259',
-      transactions: { buys: 25852, sells: 12863, total: 12989 },
-      volume: '$11.4M',
-      price: '$0.001',
-      change: 0.4,
-      verified: true,
-      trending: false,
-    },
-    {
-      id: 'zenai',
-      name: 'ZENAI',
-      symbol: 'ZENAI',
-      logo: '/lovable-uploads/97360cf2-12fe-46cd-892c-fbb6391c351f.png',
-      address: '5DKLa...ump',
-      age: '10d',
-      liquidity: '177.9K',
-      marketCap: '$1M',
-      blueChip: '5.4%',
-      holders: '78.6K',
-      smart: '-/10',
-      transactions: { buys: 23044, sells: 11522, total: 11522 },
-      volume: '$13.2M',
-      price: '$0.0001',
-      change: 0,
-      verified: true,
-      trending: false,
-    },
+    // ... more tokens with similar complete data structure
   ];
 
   const ageOptions = [
@@ -156,10 +140,52 @@ const Trending = () => {
     setFavorites(newFavorites);
   };
 
+  const handleSort = (key: string) => {
+    let direction: 'asc' | 'desc' = 'asc';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const getSortedTokens = () => {
+    if (!sortConfig) return trendingTokens;
+    
+    return [...trendingTokens].sort((a, b) => {
+      const aValue = a[sortConfig.key as keyof typeof a];
+      const bValue = b[sortConfig.key as keyof typeof b];
+      
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        return sortConfig.direction === 'asc' 
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
+      }
+      
+      if (typeof aValue === 'number' && typeof bValue === 'number') {
+        return sortConfig.direction === 'asc' ? aValue - bValue : bValue - aValue;
+      }
+      
+      return 0;
+    });
+  };
+
   const formatChange = (change: number) => {
     const sign = change >= 0 ? '+' : '';
     return `${sign}${change.toFixed(1)}%`;
   };
+
+  const getChangeForPeriod = (token: any) => {
+    switch (activeTab) {
+      case '1m': return token.change1m;
+      case '5m': return token.change5m;
+      case '1h': return token.change1h;
+      case '6h': return token.change6h;
+      case '24h': return token.change24h;
+      default: return token.change1h;
+    }
+  };
+
+  const sortedTokens = getSortedTokens();
 
   return (
     <div className="p-2 md:p-4 max-w-full mx-auto bg-gray-900 text-white">
@@ -213,23 +239,26 @@ const Trending = () => {
       {/* Table Container with Horizontal Scroll */}
       <div className="bg-gray-800 rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
-          <div className="min-w-[800px]">
+          <div className="min-w-[1400px]">
             {/* Table Header */}
-            <div className="px-2 md:px-4 py-2 md:py-3 border-b border-gray-700 grid grid-cols-12 gap-1 md:gap-2 text-xs text-gray-400 items-center">
-              <div className="col-span-3 md:col-span-2">
-                <button className="flex items-center space-x-1 hover:text-white text-xs">
+            <div className="px-2 md:px-4 py-2 md:py-3 border-b border-gray-700 grid grid-cols-16 gap-1 md:gap-2 text-xs text-gray-400 items-center">
+              <div className="col-span-2">
+                <button 
+                  onClick={() => handleSort('name')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
                   <span>Token</span>
                   <span>⇅</span>
                 </button>
               </div>
-              <div className="hidden md:block">
+              <div>
                 <FilterDropdown
                   title="Age"
                   options={ageOptions}
                   onSelect={(value) => console.log('Age filter:', value)}
                 />
               </div>
-              <div className="hidden md:block">
+              <div>
                 <FilterDropdown
                   title="Liq"
                   options={liquidityOptions}
@@ -237,53 +266,107 @@ const Trending = () => {
                   hasRange={true}
                 />
               </div>
-              <div className="hidden md:block">
-                <button className="flex items-center space-x-1 hover:text-white text-xs">
+              <div>
+                <button 
+                  onClick={() => handleSort('marketCap')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
                   <span>MC</span>
                   <span>⇅</span>
                 </button>
               </div>
-              <div className="hidden md:block">
-                <button className="flex items-center space-x-1 hover:text-white text-xs">
+              <div>
+                <button 
+                  onClick={() => handleSort('blueChip')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
                   <span>BlueChip</span>
                   <span>⇅</span>
                 </button>
               </div>
-              <div className="hidden lg:block">
+              <div>
                 <FilterDropdown
                   title="Holders"
                   options={holdersOptions}
                   onSelect={(value) => console.log('Holders filter:', value)}
                 />
               </div>
-              <div className="hidden lg:block">
-                <button className="flex items-center space-x-1 hover:text-white text-xs">
+              <div>
+                <button 
+                  onClick={() => handleSort('smart')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
                   <span>Smart / KOL</span>
                   <span>⇅</span>
                 </button>
               </div>
-              <div className="hidden xl:block">
-                <button className="flex items-center space-x-1 hover:text-white text-xs">
+              <div>
+                <button 
+                  onClick={() => handleSort('kol')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
+                  <span>KOL</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div>
+                <button 
+                  onClick={() => handleSort('transactions')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
                   <span>1h TXs</span>
                   <span>⇅</span>
                 </button>
               </div>
-              <div className="hidden xl:block">
-                <button className="flex items-center space-x-1 hover:text-white text-xs">
+              <div>
+                <button 
+                  onClick={() => handleSort('volume')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
                   <span>1h Vol</span>
                   <span>⇅</span>
                 </button>
               </div>
-              <div className="hidden sm:block">
-                <button className="flex items-center space-x-1 hover:text-white text-xs">
+              <div>
+                <button 
+                  onClick={() => handleSort('price')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
                   <span>Price</span>
                   <span>⇅</span>
                 </button>
               </div>
               <div>
-                <button className="flex items-center space-x-1 hover:text-white text-xs">
+                <button 
+                  onClick={() => handleSort('change1m')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
+                  <span>1m%</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div>
+                <button 
+                  onClick={() => handleSort('change5m')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
+                  <span>5m%</span>
+                  <span>⇅</span>
+                </button>
+              </div>
+              <div>
+                <button 
+                  onClick={() => handleSort('change1h')}
+                  className="flex items-center space-x-1 hover:text-white text-xs"
+                >
                   <span>1h%</span>
                   <span>⇅</span>
+                </button>
+              </div>
+              <div>
+                <button className="flex items-center space-x-1 hover:text-white text-xs">
+                  <span>Degen Audit</span>
+                  <span>▼</span>
                 </button>
               </div>
               <div className="text-right">
@@ -293,27 +376,27 @@ const Trending = () => {
 
             {/* Table Body */}
             <div>
-              {trendingTokens.map((token, index) => (
+              {sortedTokens.map((token, index) => (
                 <div
                   key={token.id}
-                  className="px-2 md:px-4 py-2 md:py-3 border-b border-gray-700 last:border-b-0 hover:bg-gray-750 transition-colors grid grid-cols-12 gap-1 md:gap-2 items-center text-xs md:text-sm"
+                  className="px-2 md:px-4 py-2 md:py-3 border-b border-gray-700 last:border-b-0 hover:bg-gray-750 transition-colors grid grid-cols-16 gap-1 md:gap-2 items-center text-xs"
                 >
                   {/* Token Info - Fixed on Left */}
-                  <div className="col-span-3 md:col-span-2 flex items-center space-x-1 md:space-x-2 min-w-0">
+                  <div className="col-span-2 flex items-center space-x-1 md:space-x-2 min-w-0">
                     <button
                       onClick={() => toggleFavorite(token.id)}
-                      className={`text-sm md:text-lg hover:scale-110 transition-transform flex-shrink-0 ${
+                      className={`text-sm hover:scale-110 transition-transform flex-shrink-0 ${
                         favorites.has(token.id) ? 'text-yellow-400' : 'text-gray-500'
                       }`}
                     >
                       {favorites.has(token.id) ? '★' : '☆'}
                     </button>
-                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-orange-500 flex items-center justify-center flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center flex-shrink-0">
                       <span className="text-xs font-bold">🔥</span>
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="font-semibold text-white flex items-center space-x-1">
-                        <span className="truncate text-xs md:text-sm">{token.name}</span>
+                        <span className="truncate text-xs">{token.name}</span>
                         <button 
                           className="text-blue-400 hover:text-blue-300 flex-shrink-0"
                           title="Search on Twitter"
@@ -325,57 +408,87 @@ const Trending = () => {
                     </div>
                   </div>
 
-                  {/* Age - Hidden on Mobile */}
-                  <div className="hidden md:block text-white text-xs">{token.age}</div>
+                  {/* Age */}
+                  <div className="text-white text-xs">{token.age}</div>
 
-                  {/* Liquidity - Hidden on Mobile */}
-                  <div className="hidden md:block text-white text-xs">{token.liquidity}</div>
+                  {/* Liquidity */}
+                  <div className="text-white text-xs">{token.liquidity}</div>
 
-                  {/* Market Cap - Hidden on Mobile */}
-                  <div className="hidden md:block text-white text-xs">{token.marketCap}</div>
+                  {/* Market Cap */}
+                  <div className="text-white text-xs">{token.marketCap}</div>
 
-                  {/* BlueChip - Hidden on Mobile */}
-                  <div className="hidden md:block text-white text-xs">{token.blueChip}</div>
+                  {/* BlueChip */}
+                  <div className="text-white text-xs">{token.blueChip}</div>
 
-                  {/* Holders - Hidden on Mobile/Tablet */}
-                  <div className="hidden lg:block text-white text-xs">{token.holders}</div>
+                  {/* Holders */}
+                  <div className="text-white text-xs">{token.holders}</div>
 
-                  {/* Smart / KOL - Hidden on Mobile/Tablet */}
-                  <div className="hidden lg:block text-white text-xs">{token.smart}</div>
+                  {/* Smart / KOL */}
+                  <div className="text-white text-xs">{token.smart}</div>
 
-                  {/* Transactions - Hidden on Mobile/Small Tablet */}
-                  <div className="hidden xl:block text-white text-xs">
+                  {/* KOL */}
+                  <div className="text-white text-xs">
+                    <div>{token.kol}</div>
+                    <div className="text-xs text-gray-400">{token.kolTotal}</div>
+                  </div>
+
+                  {/* Transactions */}
+                  <div className="text-white text-xs">
                     <div>{token.transactions.buys.toLocaleString()}</div>
                     <div className="text-xs text-gray-400">
                       {token.transactions.sells.toLocaleString()}/{token.transactions.total.toLocaleString()}
                     </div>
                   </div>
 
-                  {/* Volume - Hidden on Mobile/Small Tablet */}
-                  <div className="hidden xl:block text-white text-xs">{token.volume}</div>
+                  {/* Volume */}
+                  <div className="text-white text-xs">{token.volume}</div>
 
-                  {/* Price - Hidden on Mobile */}
-                  <div className="hidden sm:block text-white text-xs">{token.price}</div>
+                  {/* Price */}
+                  <div className="text-white text-xs">{token.price}</div>
 
-                  {/* Price Change */}
+                  {/* 1m% */}
                   <div className={`font-medium text-xs ${
-                    token.change > 0 ? 'text-green-400' : token.change < 0 ? 'text-red-400' : 'text-gray-400'
+                    token.change1m > 0 ? 'text-green-400' : token.change1m < 0 ? 'text-red-400' : 'text-gray-400'
                   }`}>
-                    {formatChange(token.change)}
+                    {formatChange(token.change1m)}
+                  </div>
+
+                  {/* 5m% */}
+                  <div className={`font-medium text-xs ${
+                    token.change5m > 0 ? 'text-green-400' : token.change5m < 0 ? 'text-red-400' : 'text-gray-400'
+                  }`}>
+                    {formatChange(token.change5m)}
+                  </div>
+
+                  {/* 1h% */}
+                  <div className={`font-medium text-xs ${
+                    token.change1h > 0 ? 'text-green-400' : token.change1h < 0 ? 'text-red-400' : 'text-gray-400'
+                  }`}>
+                    {formatChange(token.change1h)}
+                  </div>
+
+                  {/* Degen Audit */}
+                  <div className="text-white text-xs">
+                    <div className="grid grid-cols-5 gap-1 text-xs">
+                      <span className="text-green-400">{token.noMint}</span>
+                      <span className="text-green-400">{token.blacklist}</span>
+                      <span className="text-yellow-400">{token.burnt}</span>
+                      <span className="text-white">{token.top10}</span>
+                      <span className="text-white">{token.insiders}</span>
+                    </div>
+                    <div className="text-xs text-gray-400 mt-1">{token.degen}</div>
                   </div>
 
                   {/* Buy Button - Fixed on Right */}
                   <div className="flex justify-end">
                     {/* Desktop Buy Button */}
-                    <button className="hidden md:flex bg-green-500 hover:bg-green-600 text-black px-2 md:px-3 py-1 rounded text-xs font-medium transition-colors items-center space-x-1">
+                    <button className="hidden md:flex bg-green-500 hover:bg-green-600 text-black px-2 py-1 rounded text-xs font-medium transition-colors items-center space-x-1">
                       <span>💰</span>
                       <span>Buy</span>
                     </button>
                     {/* Mobile Buy Button - Green Circle */}
                     <button className="md:hidden w-6 h-6 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center transition-colors">
-                      <div className="w-3 h-3 bg-green-600 rounded-full flex items-center justify-center">
-                        <span className="text-xs text-white">⚡</span>
-                      </div>
+                      <span className="text-xs text-white">💰</span>
                     </button>
                   </div>
                 </div>
